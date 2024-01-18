@@ -12,18 +12,16 @@ function nyCurrentCategories(results) {
   // }
 }
 
-
 const readingList = "history";
 export function loadHistory() {
-  let history =  JSON.parse(localStorage.getItem(readingList));
-  if (history == null)
-    history = [];
+  let history = JSON.parse(localStorage.getItem(readingList));
+  if (history == null) history = [];
   return history;
 }
 //store city search to local storage
 export function storeHistory(title) {
   let history = loadHistory();
-  history.push({"title": title});
+  history.push({ title: title });
   localStorage.setItem(readingList, JSON.stringify(history));
 }
 
@@ -59,7 +57,31 @@ function nyCurrentCategoryDetail(results) {
 
 function addToReadingList(event) {
   event.preventDefault();
-  event.currentTarget();
+  // event.currentTarget();
+
+  // Find the parent card element of the clicked button
+  var cardElement = $(event.currentTarget).closest(".card");
+
+  // Extract information from the card
+  var title = cardElement.find(".card-title").text();
+  var author = cardElement.find("h6").text();
+  var description = cardElement.find(".card-text").text();
+
+  // Create an object with the extracted information
+  var bookInfo = {
+    title: title,
+    author: author,
+    description: description,
+  };
+
+  // Get the existing reading list from local storage
+  var readingList = loadHistory();
+
+  // Add the new book to the reading list
+  readingList.push(bookInfo);
+
+  // Store the updated reading list in local storage
+  localStorage.setItem(readingList, JSON.stringify(readingList));
 }
 
 function nyArticlesFromQuery(results) {
