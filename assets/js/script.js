@@ -79,11 +79,19 @@ function addToReadingList(event) {
   var readingList = loadHistory();
   var readingKey = "history";
   console.log(readingList);
-  // Add the new book to the reading list
-  readingList.push(bookInfo);
+  
+  // Add the new book to the reading list only if it does not exist in the array
+  const found = readingList.some(function(object) {
+    return (object.title === bookInfo.title) && (object.title === bookInfo.title)  ;
+  });
+
+  if (!found) {
+    readingList.push(bookInfo);
+    // Store the updated reading list in local storage
+    localStorage.setItem(readingKey, JSON.stringify(readingList));
+  }
+  
   console.log(readingList);
-  // Store the updated reading list in local storage
-  localStorage.setItem(readingKey, JSON.stringify(readingList));
 }
 
 // Function to handle modal details when it is shown
