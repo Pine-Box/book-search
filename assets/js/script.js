@@ -13,17 +13,17 @@ function nyCurrentCategories(results) {
 }
 
 const readingList = "history";
-export function loadHistory() {
+function loadHistory() {
   let history = JSON.parse(localStorage.getItem(readingList));
   if (history == null) history = [];
   return history;
 }
 //store city search to local storage
-export function storeHistory(title) {
-  let history = loadHistory();
-  history.push({ title: title });
-  localStorage.setItem(readingList, JSON.stringify(history));
-}
+// export function storeHistory(title) {
+//   let history = loadHistory();
+//   history.push({ title: title });
+//   localStorage.setItem(readingList, JSON.stringify(history));
+// }
 
 function nyCurrentCategoryDetail(results) {
   console.log(results);
@@ -42,22 +42,25 @@ function nyCurrentCategoryDetail(results) {
               <h5 class="card-title">${nyCurrentResults.title}</h5>
               <h6>${nyCurrentResults.author}</h6>
               <p class="card-text">${nyCurrentResults.description}</p>
-              <a href="#" class="btn btn-success readList-btn">Save to Read Later</a>
-              </div>
+              <a href="#" class="btn btn-success readList-btn data-bs-toggle="modal"
+              data-bs-target="#bookDetailsModal"
+              data-title="${nyCurrentResults.title}"
+              data-author="${nyCurrentResults.author}"
+              data-description="${nyCurrentResults.description}">Save to Read Later</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
     `);
 
-    $(".readList-btn").on("click", addToReadingList);
     $("#book-results").append(newCard);
   }
+  $(".readList-btn").on("click", addToReadingList);
 }
 
 function addToReadingList(event) {
   event.preventDefault();
-  // event.currentTarget();
 
   // Find the parent card element of the clicked button
   var cardElement = $(event.currentTarget).closest(".card");
@@ -65,24 +68,49 @@ function addToReadingList(event) {
   // Extract information from the card
   var title = cardElement.find(".card-title").text();
   var author = cardElement.find("h6").text();
-  var description = cardElement.find(".card-text").text();
 
   // Create an object with the extracted information
   var bookInfo = {
     title: title,
     author: author,
-    description: description,
   };
 
   // Get the existing reading list from local storage
   var readingList = loadHistory();
-
+  var readingKey = "history";
+  console.log(readingList);
   // Add the new book to the reading list
   readingList.push(bookInfo);
-
+  console.log(readingList);
   // Store the updated reading list in local storage
-  localStorage.setItem(readingList, JSON.stringify(readingList));
+  localStorage.setItem(readingKey, JSON.stringify(readingList));
 }
+
+// Function to handle modal details when it is shown
+function handleModalDetails(event) {
+  var history = loadHistory();
+
+  // var button = $(event.relatedTarget); // Button that triggered the modal
+  for (let i = 0; i < history.length; i++) {
+    // Dynamically fill in the details
+    var title = history[i].title; // Extract data from the button
+    var author = history[i].author;
+    var listItems = $(`
+    <h5>${title}</h5>
+    <h6>${author}</h6>
+  `);
+    $(".modal-body").append(listItems);
+  }
+
+  console.log(history);
+  // var modalBody = $("#bookDetailsModalBody"); // Find modal body element
+
+  $("#bookDetailsModal").modal("show");
+  console.log("modal");
+}
+
+// Event listener for the modal show event
+$("#readModal").on("click", handleModalDetails);
 
 function nyArticlesFromQuery(results) {
   console.log(results);
