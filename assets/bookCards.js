@@ -1,9 +1,14 @@
 const APIKey = 'piWrvbCgFbcPfVDbQOrN2nA3AEuEQnZP'
+
+const artic_api_key = 'ONozanAEP2zcGEQXDK7trQrMZKJnyM4X'
 const currentHardcoverListUrl =
   'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=' +
   APIKey
 const namesListUrl =
   'https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=' + APIKey
+
+const articlesearch =
+  'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=yourkey'
 
 // Function to create book cards
 function createBookCards(books) {
@@ -32,6 +37,15 @@ function createBookCards(books) {
       .attr('src', bookImage)
       .attr('alt', 'Book Image')
 
+    const addButton = $('<button>')
+      .addClass('btn btn-primary')
+      .text('Add to List')
+    addButton.on('click', function () {
+      // Handle the click event when the "Add to List" button is clicked
+      // You can add your logic here to handle adding the book to a list
+      console.log('Book added to list:', book)
+    })
+
     // Append elements to the card body
     cardBody.append(cardTitle, cardSubtitle, cardImage)
     bookCard.append(cardBody)
@@ -54,7 +68,7 @@ $(document).ready(function () {
 
   // Function to get the list of book names
   function getListOfNames() {
-    let url = namesListUrl
+    let url = namesListUrl + APIKey
     console.log(url)
     fetch(url)
       .then(function (response) {
@@ -81,3 +95,15 @@ $('.btn-success').on('click', function () {
     createBookCards(books)
   })
 })
+
+function getArticles(query) {
+  let url = articlesurl + query + '&api-key=' + ny_api_key
+  console.log(url)
+  fetch(url)
+    .then(function (response) {
+      return response.json()
+    })
+    .then(function (data) {
+      return nyArticlesFromQuery(data)
+    })
+}
