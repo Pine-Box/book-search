@@ -99,6 +99,9 @@ function addToReadingList(event) {
 function handleModalDetails(event) {
   var history = loadHistory();
 
+  // clear the content of the modal so that every time it is clicked, it doesnt append the array again
+  var modalContent = $(".modal-body")
+  modalContent.empty()
   // var button = $(event.relatedTarget); // Button that triggered the modal
   for (let i = 0; i < history.length; i++) {
     // Dynamically fill in the details
@@ -108,7 +111,7 @@ function handleModalDetails(event) {
     <h5>${title}</h5>
     <h6>${author}</h6>
   `);
-    $(".modal-body").append(listItems);
+    modalContent.append(listItems);
   }
 
   console.log(history);
