@@ -1,67 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>BookSearch</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div id="hero-banner" class="jumbotron jumbotron-fluid p-5">
-        <div class="container">
-          <h1 class="display-4 text-white">BookSearch</h1>
-          <p class="lead text-white">The world's books at your fingertips...</p>
-          <div class="input-group input-group-sm mb-3">
-            <input id="search-box" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Enter book title">
-          </div>
-          <button type="button" class="btn btn-success" id="searchbtn">Search</button>
+      <button
+        type="button"
+        class="btn btn-success"
+        id="readModal"
+        data-toggle="modal"
+        data-target="#bookDetailsModal"
+      >
+        Reading List
+      </button>
+      <div class="container">
+        <h1 class="display-4 text-white">BookSearch</h1>
+        <p class="lead text-white">The world's books at your fingertips...</p>
+        <div class="input-group input-group-sm mb-3">
+          <input
+            id="search-box"
+            type="text"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm"
+            placeholder="Enter book title"
+          />
         </div>
+        <button type="button" class="btn btn-success" id="searchbtn">
+          Search
+        </button>
       </div>
-
-    <!-- Search Results will appear here -->
-    <div id="book-results" class="container">
-
-<!-- Test card: -->
-      <!-- <div class="row">
-      <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="./assets/images/bookCover.jpeg" class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-
-
     </div>
 
-<!-- Scripts -->
-<!-- Bootstrap -->
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"
-></script>
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Ours -->
-<script src="./assets/js/script.js" type="module" ></script>
-<script src="./assets/js/api.js" type="module" ></script>
-</body>
+    <!-- Search Results will appear here -->
+    <div id="book-results" class="container"></div>
+
+    <!-- Scripts -->
+    <!-- Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Ours -->
+    <script src="assets/js/script.js" type="module"></script>
+    <script src="assets/js/api.js" type="module"></script>
+
+    <div
+      class="modal fade"
+      id="bookDetailsModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="bookDetailsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="bookDetailsModalLabel">Book Details</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="bookDetailsModalBody">
+            <!-- Book details will go here -->
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
