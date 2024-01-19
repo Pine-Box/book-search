@@ -81,8 +81,9 @@ function addToReadingList(event) {
   console.log(readingList);
   
   // Add the new book to the reading list only if it does not exist in the array
+  // found is True if it finds an object with the same title and author
   const found = readingList.some(function(object) {
-    return (object.title === bookInfo.title) && (object.title === bookInfo.title)  ;
+    return (object.title === bookInfo.title) && (object.author === bookInfo.author)  ;
   });
 
   if (!found) {
