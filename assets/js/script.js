@@ -2,21 +2,21 @@ import {
   getNamesList,
   getCurrentNamedListDetails,
   getArticles,
-} from "/assets/js/api.js";
+} from '/assets/js/api.js'
 
 //api call backs
 function nyCurrentCategories(results) {
-  console.log(results);
+  console.log(results)
   // for (let i=0;i < results.length; i++){
   //
   // }
 }
 
-const readingList = "history";
+const readingList = 'history'
 function loadHistory() {
-  let history = JSON.parse(localStorage.getItem(readingList));
-  if (history == null) history = [];
-  return history;
+  let history = JSON.parse(localStorage.getItem(readingList))
+  if (history == null) history = []
+  return history
 }
 //store city search to local storage
 // export function storeHistory(title) {
@@ -26,9 +26,9 @@ function loadHistory() {
 // }
 
 function nyCurrentCategoryDetail(results) {
-  console.log(results);
+  console.log(results)
   for (let i = 0; i < results.results.books.length; i++) {
-    var nyCurrentResults = results.results.books[i];
+    var nyCurrentResults = results.results.books[i]
 
     var newCard = $(`
       <div class="row">
@@ -52,68 +52,68 @@ function nyCurrentCategoryDetail(results) {
         </div>
       </div>
     </div>
-    `);
+    `)
 
-    $("#book-results").append(newCard);
+    $('#book-results').append(newCard)
   }
-  $(".readList-btn").on("click", addToReadingList);
+  $('.readList-btn').on('click', addToReadingList)
 }
 
 function addToReadingList(event) {
-  event.preventDefault();
+  event.preventDefault()
 
   // Find the parent card element of the clicked button
-  var cardElement = $(event.currentTarget).closest(".card");
+  var cardElement = $(event.currentTarget).closest('.card')
 
   // Extract information from the card
-  var title = cardElement.find(".card-title").text();
-  var author = cardElement.find("h6").text();
+  var title = cardElement.find('.card-title').text()
+  var author = cardElement.find('h6').text()
 
   // Create an object with the extracted information
   var bookInfo = {
     title: title,
     author: author,
-  };
+  }
 
   // Get the existing reading list from local storage
-  var readingList = loadHistory();
-  var readingKey = "history";
-  console.log(readingList);
+  var readingList = loadHistory()
+  var readingKey = 'history'
+  console.log(readingList)
   // Add the new book to the reading list
-  readingList.push(bookInfo);
-  console.log(readingList);
+  readingList.push(bookInfo)
+  console.log(readingList)
   // Store the updated reading list in local storage
-  localStorage.setItem(readingKey, JSON.stringify(readingList));
+  localStorage.setItem(readingKey, JSON.stringify(readingList))
 }
 
 // Function to handle modal details when it is shown
 function handleModalDetails(event) {
-  var history = loadHistory();
+  var history = loadHistory()
 
   // var button = $(event.relatedTarget); // Button that triggered the modal
   for (let i = 0; i < history.length; i++) {
     // Dynamically fill in the details
-    var title = history[i].title; // Extract data from the button
-    var author = history[i].author;
+    var title = history[i].title // Extract data from the button
+    var author = history[i].author
     var listItems = $(`
     <h5>${title}</h5>
     <h6>${author}</h6>
-  `);
-    $(".modal-body").append(listItems);
+  `)
+    $('.modal-body').append(listItems)
   }
 
-  console.log(history);
+  console.log(history)
   // var modalBody = $("#bookDetailsModalBody"); // Find modal body element
 
-  $("#bookDetailsModal").modal("show");
-  console.log("modal");
+  $('#bookDetailsModal').modal('show')
+  console.log('modal')
 }
 
 // Event listener for the modal show event
-$("#readModal").on("click", handleModalDetails);
+$('#readModal').on('click', handleModalDetails)
 
 function nyArticlesFromQuery(results) {
-  console.log(results);
+  console.log(results)
   // for (let i=0;i < results.books.length; i++){
   //
   // }
@@ -122,30 +122,37 @@ function nyArticlesFromQuery(results) {
 // end of callbacks
 
 function currentCategoryDetails(category, offset) {
-  getCurrentNamedListDetails(category, offset);
+  getCurrentNamedListDetails(category, offset)
 }
 
 function currentCategories() {
-  getNamesList();
+  getNamesList()
 }
 
 function searchArticles(query) {
-  getArticles(query);
+  getArticles(query)
 }
 
 function searchResults(ev) {
-  ev.preventDefault();
-  console.log("search click");
+  ev.preventDefault()
+  console.log('search click')
 }
 
-$("#searchbtn").on("click", searchResults);
+$(document).ready(function () {
+  $('#searchbtn').on('click', searchResults)
+  currentCategories()
+  currentCategoryDetails('hardcover-nonfiction', 0)
+  searchArticles('Fourth Wing')
+})
 
-//getReviewByTitle('0553418025',encodeURIComponent('THE MARTIAN'), encodeURIComponent('Andy Weir'));
+// $("#searchbtn").on("click", searchResults);
 
-currentCategories();
-currentCategoryDetails("hardcover-nonfiction", 0);
-searchArticles("Fourth Wing");
+// //getReviewByTitle('0553418025',encodeURIComponent('THE MARTIAN'), encodeURIComponent('Andy Weir'));
 
-export { nyCurrentCategoryDetail, nyCurrentCategories, nyArticlesFromQuery };
+// currentCategories();
+// currentCategoryDetails("hardcover-nonfiction", 0);
+// searchArticles("Fourth Wing");
+
+export { nyCurrentCategoryDetail, nyCurrentCategories, nyArticlesFromQuery }
 
 //https://api.nytimes.com/svc/books/v3/reviews.json?isbn=0553418025&title=The+Martian&author=Andy+Weir&api-key=pifi4e25GCt32q2X47LeT8M19jNWKUgK
