@@ -107,9 +107,10 @@ function handleModalDetails(event) {
     // Dynamically fill in the details
     var title = history[i].title; // Extract data from the button
     var author = history[i].author;
-    var listItems = $(`
+    var listItems = $(`<div class="reading-list-item">
     <h5>${title}</h5>
     <h6>${author}</h6>
+    </div>
   `);
     modalContent.append(listItems);
   }
