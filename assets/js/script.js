@@ -32,8 +32,8 @@ function nyCurrentCategoryDetail(results) {
 
     var newCard = $(`
       <div class="row">
-      <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
+      <div class="mx-auto card mb-3 p-1" style="max-width: 50rem;">
+        <div class="row">
           <div class="col-md-4">
             <img src=${nyCurrentResults.book_image} class="img-fluid rounded-start" alt="...">
           </div>
@@ -42,11 +42,18 @@ function nyCurrentCategoryDetail(results) {
               <h5 class="card-title">${nyCurrentResults.title}</h5>
               <h6>${nyCurrentResults.author}</h6>
               <p class="card-text">${nyCurrentResults.description}</p>
-              <a href="#" class="btn btn-success readList-btn data-bs-toggle="modal"
+              <a href="#" class="btn btn-success readList-btn ms-0 m-2 data-bs-toggle="modal"
               data-bs-target="#bookDetailsModal"
               data-title="${nyCurrentResults.title}"
               data-author="${nyCurrentResults.author}"
               data-description="${nyCurrentResults.description}">Save to Read Later</a>
+              <button
+              type="button"
+              class="btn btn-success m-2"
+              id="newsModalBtn"
+              data-bs-toggle="modal"
+              data-bs-target="#newsModal"
+            >This Book in the News</button>
             </div>
           </div>
         </div>
@@ -58,6 +65,7 @@ function nyCurrentCategoryDetail(results) {
   }
   $(".readList-btn").on("click", addToReadingList);
 }
+
 
 function addToReadingList(event) {
   event.preventDefault();
