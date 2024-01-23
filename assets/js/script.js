@@ -128,7 +128,17 @@ function handleModalDetails(event) {
       var bookTitle = $(event.target).parent().children('#title').text()
       var bookAuthor = $(event.target).parent().children('#author').text()
 
-      console.log(bookAuthor, bookTitle)
+      function removeFromLS(bookTitle, bookAuthor) {
+        var history = loadHistory()
+
+        var newHistory = history.filter(
+          (book) => book.author !== bookAuthor && book.title !== bookTitle
+        )
+
+        localStorage.setItem('history', JSON.stringify(newHistory))
+      }
+      removeFromLS(bookTitle, bookAuthor)
+      handleModalDetails()
     })
 
     listItem.append(removeButton)
