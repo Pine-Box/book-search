@@ -115,16 +115,20 @@ function handleModalDetails(event) {
     var title = history[i].title // Extract data from the button
     var author = history[i].author
     var listItem = $(`<div class="reading-list-item">
-    <h5>${title}</h5>
-    <h6>${author}</h6>
+    <h5 id="title">${title}</h5>
+    <h6 id="author">${author}</h6>
     </div>
   `)
 
     var removeButton = $('<button>')
     removeButton.text('Remove')
     removeButton.addClass('btn btn-danger')
-    removeButton.on('click', function () {
-      console.log('hit')
+
+    removeButton.on('click', function (event) {
+      var bookTitle = $(event.target).parent().children('#title').text()
+      var bookAuthor = $(event.target).parent().children('#author').text()
+
+      console.log(bookAuthor, bookTitle)
     })
 
     listItem.append(removeButton)
