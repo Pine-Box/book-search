@@ -42,17 +42,22 @@ function nyCurrentCategoryDetail(results) {
               <h5 class="card-title">${nyCurrentResults.title}</h5>
               <h6>${nyCurrentResults.author}</h6>
               <p class="card-text">${nyCurrentResults.description}</p>
-              <a href="#" class="btn btn-success readList-btn data-bs-toggle="modal"
+              <a href="#" class="btn btn-success readList-btn" 
+							data-bs-toggle="modal"
               data-bs-target="#bookDetailsModal"
               data-title="${nyCurrentResults.title}"
               data-author="${nyCurrentResults.author}"
               data-description="${nyCurrentResults.description}">Save to Read Later</a>
+							<a href="#" id='remove' class="btn btn-danger remove-btn" data-bs-toggle="bookInfo" data-title="${nyCurrentResults.title}"
+							data-author="${nyCurrentResults.author}"
+							data-description="${nyCurrentResults.description}">Remove from Reading List</a>
             </div>
           </div>
         </div>
       </div>
     </div>
     `)
+    // $('.remove-btn').on('click', removeFromReadingList)
 
     $('#book-results').append(newCard)
   }
@@ -86,6 +91,31 @@ function addToReadingList(event) {
   localStorage.setItem(readingKey, JSON.stringify(readingList))
 }
 
+function removeFromReadingList(event) {
+  event.preventDefault()
+  // Assuming you have a button with class 'remove-btn' to remove a book
+  var indexToRemove = $(event.currentTarget).data('bookInfo')
+  console.log(indexToRemove)
+  // Remove the book at the specified index from the reading list
+  let history = loadHistory()
+
+  console.log(history)
+
+  history.splice(indexToRemove, 1)
+
+  console.log(history)
+
+  localStorage.setItem(readingList, JSON.stringify(history))
+  // Refresh the reading list
+  refreshReadingList()
+}
+
+function refreshReadingList() {
+  // Load the updated reading list and update the UI
+  let history = loadHistory()
+  // ... (update the UI to reflect the changes)
+}
+
 // Function to handle modal details when it is shown
 function handleModalDetails(event) {
   var history = loadHistory()
@@ -96,9 +126,19 @@ function handleModalDetails(event) {
     var title = history[i].title // Extract data from the button
     var author = history[i].author
     var listItems = $(`
-    <h5>${title}</h5>
-    <h6>${author}</h6>
+    <div>
+			<h5>${title}</h5>
+    	<h6>${author}</h6>
+		</div>
   `)
+    console.log(listItems)
+    var removeBtn = $('<button>')
+    removeBtn.text('remove')
+    removeBtn.attr('data-book', 'bookInfo')
+    removeBtn.on('click', function (event) {
+      removeFromReadingList(event)
+    })
+    listItems.append(removeBtn)
     $('.modal-body').append(listItems)
   }
 
