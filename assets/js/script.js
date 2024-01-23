@@ -35,7 +35,7 @@ function nyCurrentCategoryDetail(results) {
       <div class="mx-auto card mb-3 p-1" style="max-width: 50rem;">
         <div class="row">
           <div class="col-md-4">
-            <img src=${nyCurrentResults.book_image} class="img-fluid rounded-start" alt="...">
+            <img src=${nyCurrentResults.book_image} class="img-fluid rounded-start" alt="book cover">
           </div>
           <div class="col-md-8">
             <div class="card-body">
