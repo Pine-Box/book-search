@@ -87,27 +87,40 @@ function addToReadingList(event) {
   var readingList = loadHistory();
   var readingKey = "history";
   console.log(readingList);
-  // Add the new book to the reading list
-  readingList.push(bookInfo);
+  
+  // Add the new book to the reading list only if it does not exist in the array
+  // found is True if it finds an object with the same title and author
+  const found = readingList.some(function(object) {
+    return (object.title === bookInfo.title) && (object.author === bookInfo.author)  ;
+  });
+
+  if (!found) {
+    readingList.push(bookInfo);
+    // Store the updated reading list in local storage
+    localStorage.setItem(readingKey, JSON.stringify(readingList));
+  }
+  
   console.log(readingList);
-  // Store the updated reading list in local storage
-  localStorage.setItem(readingKey, JSON.stringify(readingList));
 }
 
 // Function to handle modal details when it is shown
 function handleModalDetails(event) {
   var history = loadHistory();
 
+  // clear the content of the modal so that every time it is clicked, it doesnt append the array again
+  var modalContent = $(".modal-body")
+  modalContent.empty()
   // var button = $(event.relatedTarget); // Button that triggered the modal
   for (let i = 0; i < history.length; i++) {
     // Dynamically fill in the details
     var title = history[i].title; // Extract data from the button
     var author = history[i].author;
-    var listItems = $(`
+    var listItems = $(`<div class="reading-list-item">
     <h5>${title}</h5>
     <h6>${author}</h6>
+    </div>
   `);
-    $(".modal-body").append(listItems);
+    modalContent.append(listItems);
   }
 
   console.log(history);

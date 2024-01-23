@@ -1,7 +1,17 @@
-
 .jumbotron {
-    background-image: url("../images/bookSearchBanner.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-} 
+  background-image: url("../images/bookSearchBanner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.reading-list-item {
+    padding: 10px; 
+    border: 2px solid transparent; 
+  }
+
+.reading-list-item:hover {
+  border: 2px solid #d3e0dc;
+  background-color: rgba(211, 224, 220, 0.5);
+  transition: background-color 0.3s ease;
+}
