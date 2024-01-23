@@ -64,6 +64,7 @@ function nyCurrentCategoryDetail(results) {
     $("#book-results").append(newCard);
   }
   $(".readList-btn").on("click", addToReadingList);
+  $("#newsModalBtn").on("click", searchArticles);
 }
 
 
@@ -150,8 +151,9 @@ function currentCategories() {
   getNamesList();
 }
 
-function searchArticles(query) {
-  getArticles(query);
+function searchArticles(ev) {
+  console.log(ev.currentTarget);
+  //getArticles(query);
 }
 
 function searchResults(ev) {
