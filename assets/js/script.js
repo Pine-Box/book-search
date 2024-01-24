@@ -2,7 +2,7 @@ import {
   getNamesList,
   getCurrentNamedListDetails,
   getArticles,
-} from './assets/js/api.js'
+} from './api.js'
 
 
 //api call backs
