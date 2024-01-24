@@ -163,6 +163,11 @@ function handleModalDetails(event) {
 $("#readModal").on("click", handleModalDetails);
 
 function nyArticlesFromQuery(results) {
+
+
+
+
+  
   // clear the content of the modal so that every time it is clicked, it doesnt append the array again
   var modalContent = $("#newsModalBody");
   modalContent.empty();
@@ -235,6 +240,7 @@ function currentCategories() {
 function searchArticles(ev) {
   // console.log(ev.currentTarget,parent);
   //getArticles(query);
+  // console.log(query)
   var cardElement = $(ev.currentTarget).closest(".card");
 
   // Extract information from the card
@@ -242,6 +248,7 @@ function searchArticles(ev) {
   var query = title.replace(/ /g, "+");
   // console.log(query)
   getArticles(query);
+  console.log(query)
 }
 
 function searchResults(ev) {
@@ -255,7 +262,7 @@ $("#searchbtn").on("click", searchResults);
 
 currentCategories();
 currentCategoryDetails("hardcover-nonfiction", 0);
-searchArticles("Fourth Wing");
+
 
 export { nyCurrentCategoryDetail, nyCurrentCategories, nyArticlesFromQuery };
 
