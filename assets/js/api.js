@@ -1,6 +1,6 @@
 import {nyArticlesFromQuery,nyCurrentCategories,nyCurrentCategoryDetail} from "/assets/js/script.js";
 
-const ny_api_key = "Cl7Cpyvrig2r1NYRfP5jbc0OVPebMWZ1";
+const ny_api_key = "VQ2PuKozsHyclC79IY3m2lnkcUeFzGRw";
 
 const currentListsUrl = "https://api.nytimes.com/svc/books/v3/lists/current/";
 const nameslisturl = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=";

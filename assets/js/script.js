@@ -6,6 +6,7 @@ import {
 
 //api call backs
 function nyCurrentCategories(results) {
+  console.log("categories");
   console.log(results);
   // for (let i=0;i < results.length; i++){
   //
@@ -27,6 +28,7 @@ function loadHistory() {
 
 function nyCurrentCategoryDetail(results) {
   console.log(results);
+  $("#book-results").empty();
   for (let i = 0; i < results.results.books.length; i++) {
     var nyCurrentResults = results.results.books[i];
 
@@ -163,11 +165,6 @@ function handleModalDetails(event) {
 $("#readModal").on("click", handleModalDetails);
 
 function nyArticlesFromQuery(results) {
-
-
-
-
-  
   // clear the content of the modal so that every time it is clicked, it doesnt append the array again
   var modalContent = $("#newsModalBody");
   modalContent.empty();
@@ -200,28 +197,35 @@ function nyArticlesFromQuery(results) {
     //   );
     // }
 
-
-
-    // card version 
+    // card version
     var articleItem = $('<div class="row">').append(
       $('<div class="mx-auto card mb-3 p-1" style="max-width: 50rem;">').append(
-          $('<div class="row">').append(
-              // Check if multimedia is available
-              results.response.docs[i].multimedia.length > 0 ? (
-                  $('<div class="col-md-4">').append(
-                      // Create image tag if multimedia is available
-                      $('<img>').attr('src', `https://www.nytimes.com/${results.response.docs[i].multimedia[17].legacy.thumbnail}`).addClass('img-fluid rounded-start').attr('alt', 'Article Image')
+        $('<div class="row">').append(
+          // Check if multimedia is available
+          results.response.docs[i].multimedia.length > 0
+            ? $('<div class="col-md-4">').append(
+                // Create image tag if multimedia is available
+                $("<img>")
+                  .attr(
+                    "src",
+                    `https://www.nytimes.com/${results.response.docs[i].multimedia[17].legacy.thumbnail}`
                   )
-              ) : null,
-              $('<div class="col-md-8">').append(
-                  $('<div class="card-body">').append(
-                      $('<h5 class="card-title">').text(artcileAbstract),
-                      $('<a>').attr('href', articleLink).attr('target', '_blank').text('Read More')
-                  )
+                  .addClass("img-fluid rounded-start")
+                  .attr("alt", "Article Image")
               )
+            : null,
+          $('<div class="col-md-8">').append(
+            $('<div class="card-body">').append(
+              $('<h5 class="card-title">').text(artcileAbstract),
+              $("<a>")
+                .attr("href", articleLink)
+                .attr("target", "_blank")
+                .text("Read More")
+            )
           )
+        )
       )
-  );
+    );
 
     modalContent.append(articleItem);
   }
@@ -248,21 +252,33 @@ function searchArticles(ev) {
   var query = title.replace(/ /g, "+");
   // console.log(query)
   getArticles(query);
-  console.log(query)
+  console.log(query);
 }
 
-function searchResults(ev) {
-  ev.preventDefault();
-  console.log("search click");
-}
+$("#categoryOptions").on("hide.bs.dropdown", ({ clickEvent }) => {
+  if (clickEvent?.target) {
+    // console.log(clickEvent.target.innerText);
+    var categoryName = clickEvent.target.id;
+    console.log(categoryName);
+    $("#categoryName").text(clickEvent.target.innerText)
+    currentCategoryDetails(categoryName, 0);
+    
+  }
 
-$("#searchbtn").on("click", searchResults);
+  // currentCategoryDetails(categoryName, 0);
+});
+
+// function searchResults(ev) {
+//   ev.preventDefault();
+//   console.log("search click");
+// }
+
+// $("#searchbtn").on("click", searchResults);
 
 //getReviewByTitle('0553418025',encodeURIComponent('THE MARTIAN'), encodeURIComponent('Andy Weir'));
 
 currentCategories();
 currentCategoryDetails("hardcover-nonfiction", 0);
-
 
 export { nyCurrentCategoryDetail, nyCurrentCategories, nyArticlesFromQuery };
 
