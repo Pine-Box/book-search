@@ -5,13 +5,75 @@
   background-repeat: no-repeat;
 }
 
+#hero-banner h1 {
+  font-size: 3.5rem;
+}
+
+#hero-banner p {
+  font-size: 1.5rem;
+}
+
+#background-overlay {
+  background-color: #00000080;
+  padding: 1rem;
+}
+
+#search-box {
+  border-radius: 20px;
+}
+
+#searchbtn, #readModal {
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 10px 20px;
+  margin-top: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* #searchbtn {
+  background-color: #34495e;
+  border-color: #34495e;
+  color: white;
+} */
+
+.dropdown-toggle {
+  background-color: #5a148b;
+}
+
+#searchbtn:hover {
+  background-color: #2c3e50;
+  border-color: #2c3e50;
+  color: white;
+}
+
+
 .reading-list-item {
-    padding: 10px; 
-    border: 2px solid transparent; 
-  }
+  padding: 10px; 
+  border: 2px solid transparent; 
+}
 
 .reading-list-item:hover {
-  border: 2px solid #d3e0dc;
-  background-color: rgba(211, 224, 220, 0.5);
-  transition: background-color 0.3s ease;
+border: 2px solid #d3e0dc;
+background-color: rgba(211, 224, 220, 0.5);
+transition: background-color 0.3s ease;
+}
+
+#readModal {
+  background-color: #e67e22;
+  border-color: #e67e22;
+  color: white;
+}
+
+#readModal:hover {
+  background-color: #d35400;
+  border-color: #d35400;
+  color: white;
+}
+
+/* Media Queries: */
+
+@media (max-width: 406px) {
+  #newsModalBtn {
+    margin-left: 0 !important;
+  }
 }
