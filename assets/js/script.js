@@ -52,7 +52,7 @@ function nyCurrentCategoryDetail(results) {
               data-description="${nyCurrentResults.description}">Save to Read Later</a>
               <button
               type="button"
-              class="btn btn-success m-2"
+              class="btn btn-success m-2 newsModalBtn"
               id="newsModalBtn" 
               data-bs-toggle="modal"
               data-bs-target="#newsModal"
@@ -71,7 +71,7 @@ function nyCurrentCategoryDetail(results) {
 
   //////////////////////////////////////////////////////////
 
-  $("#newsModalBtn").on("click", searchArticles);
+  $(".newsModalBtn").on("click", searchArticles);
 
   //////////////////////////////////////////////////////////
 }
@@ -172,8 +172,8 @@ function nyArticlesFromQuery(results) {
 
   // console.log(results)
   for (let i = 0; i < results.response.docs.length; i++) {
-    console.log(results.response.docs[i]);
-    console.log(results.response.docs[i].multimedia.length);
+    // console.log(results.response.docs[i]);
+    // console.log(results.response.docs[i].multimedia.length);
 
     var artcileAbstract = results.response.docs[i].abstract;
     var articleLink = results.response.docs[i].web_url;
@@ -243,17 +243,19 @@ function currentCategories() {
 }
 
 function searchArticles(ev) {
-  // console.log(ev.currentTarget,parent);
-  //getArticles(query);
-  // console.log(query)
+  // currentTarget.parentElement.parentNode.childNodes[1].childNodes[1].childNodes[0].textContent
+  // console.log(ev.currentTarget.parentElement.parentNode.childNodes[1].childNodes[1].childNodes[0].textContent)
+  // console.log($(this))
+  // [0].parentNode.childNodes[1].innerText
   var cardElement = $(ev.currentTarget).closest(".card");
 
   // Extract information from the card
   var title = cardElement.find(".card-title").text();
+  var author = cardElement.find("h6").text();
+  author = author.replace(/ /g, "+")
   var query = title.replace(/ /g, "+");
   // console.log(query)
-  getArticles(query);
-  console.log(query);
+  getArticles(query, author);
 }
 
 $("#categoryOptions").on("hide.bs.dropdown", ({ clickEvent }) => {
