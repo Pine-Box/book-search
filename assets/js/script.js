@@ -2,7 +2,7 @@ import {
   getNamesList,
   getCurrentNamedListDetails,
   getArticles,
-} from '/assets/js/api.js'
+} from './assets/js/api.js'
 
 //api call backs
 function nyCurrentCategories(results) {

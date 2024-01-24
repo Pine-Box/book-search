@@ -1,4 +1,4 @@
-import {nyArticlesFromQuery,nyCurrentCategories,nyCurrentCategoryDetail} from "/assets/js/script.js";
+import {nyArticlesFromQuery,nyCurrentCategories,nyCurrentCategoryDetail} from "./assets/js/script.js";
 
 const ny_api_key = "HluAFGocuxTVG9BBFa6CtKRpWZSxBL3O";
 
