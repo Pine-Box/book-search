@@ -2,21 +2,21 @@ import {
   getNamesList,
   getCurrentNamedListDetails,
   getArticles,
-} from '/assets/js/api.js'
+} from "/assets/js/api.js";
 
 //api call backs
 function nyCurrentCategories(results) {
-  console.log(results)
+  console.log(results);
   // for (let i=0;i < results.length; i++){
   //
   // }
 }
 
-const readingList = 'history'
+const readingList = "history";
 function loadHistory() {
-  let history = JSON.parse(localStorage.getItem(readingList))
-  if (history == null) history = []
-  return history
+  let history = JSON.parse(localStorage.getItem(readingList));
+  if (history == null) history = [];
+  return history;
 }
 //store city search to local storage
 // export function storeHistory(title) {
@@ -26,9 +26,9 @@ function loadHistory() {
 // }
 
 function nyCurrentCategoryDetail(results) {
-  console.log(results)
+  console.log(results);
   for (let i = 0; i < results.results.books.length; i++) {
-    var nyCurrentResults = results.results.books[i]
+    var nyCurrentResults = results.results.books[i];
 
     var newCard = $(`
       <div class="row">
@@ -59,9 +59,9 @@ function nyCurrentCategoryDetail(results) {
         </div>
       </div>
     </div>
-    `)
+    `);
 
-    $('#book-results').append(newCard)
+    $("#book-results").append(newCard);
   }
 
   $(".readList-btn").on("click", addToReadingList);
@@ -74,151 +74,189 @@ function nyCurrentCategoryDetail(results) {
 }
 
 function addToReadingList(event) {
-  event.preventDefault()
+  event.preventDefault();
 
   // Find the parent card element of the clicked button
-  var cardElement = $(event.currentTarget).closest('.card')
+  var cardElement = $(event.currentTarget).closest(".card");
 
   // Extract information from the card
-  var title = cardElement.find('.card-title').text()
-  var author = cardElement.find('h6').text()
+  var title = cardElement.find(".card-title").text();
+  var author = cardElement.find("h6").text();
 
   // Create an object with the extracted information
   var bookInfo = {
     title: title,
     author: author,
-  }
+  };
 
   // Get the existing reading list from local storage
-  var readingList = loadHistory()
-  var readingKey = 'history'
-  console.log(readingList)
+  var readingList = loadHistory();
+  var readingKey = "history";
+  console.log(readingList);
 
   // Add the new book to the reading list only if it does not exist in the array
   // found is True if it finds an object with the same title and author
   const found = readingList.some(function (object) {
-    return object.title === bookInfo.title && object.author === bookInfo.author
-  })
+    return object.title === bookInfo.title && object.author === bookInfo.author;
+  });
 
   if (!found) {
-    readingList.push(bookInfo)
+    readingList.push(bookInfo);
     // Store the updated reading list in local storage
-    localStorage.setItem(readingKey, JSON.stringify(readingList))
+    localStorage.setItem(readingKey, JSON.stringify(readingList));
   }
 
-  console.log(readingList)
+  console.log(readingList);
 }
 
 // Function to handle modal details when it is shown
 function handleModalDetails(event) {
-  var history = loadHistory()
+  var history = loadHistory();
 
   // clear the content of the modal so that every time it is clicked, it doesnt append the array again
-  var modalContent = $('#bookDetailsModalBody')
-  modalContent.empty()
+  var modalContent = $("#bookDetailsModalBody");
+  modalContent.empty();
   // var button = $(event.relatedTarget); // Button that triggered the modal
   for (let i = 0; i < history.length; i++) {
     // Dynamically fill in the details
-    var title = history[i].title // Extract data from the button
-    var author = history[i].author
+    var title = history[i].title; // Extract data from the button
+    var author = history[i].author;
     var listItem = $(`<div class="reading-list-item">
     <h5 id="title">${title}</h5>
     <h6 id="author">${author}</h6>
     </div>
-  `)
+  `);
 
-    var removeButton = $('<button>')
-    removeButton.text('Remove')
-    removeButton.addClass('btn btn-danger')
+    var removeButton = $("<button>");
+    removeButton.text("Remove");
+    removeButton.addClass("btn btn-danger");
 
-    removeButton.on('click', function (event) {
-      var bookTitle = $(event.target).parent().children('#title').text()
-      var bookAuthor = $(event.target).parent().children('#author').text()
+    removeButton.on("click", function (event) {
+      var bookTitle = $(event.target).parent().children("#title").text();
+      var bookAuthor = $(event.target).parent().children("#author").text();
 
       function removeFromLS(bookTitle, bookAuthor) {
-        var history = loadHistory()
+        var history = loadHistory();
 
         var newHistory = history.filter(
           (book) => book.author !== bookAuthor && book.title !== bookTitle
-        )
+        );
 
-        localStorage.setItem('history', JSON.stringify(newHistory))
+        localStorage.setItem("history", JSON.stringify(newHistory));
       }
-      removeFromLS(bookTitle, bookAuthor)
-      handleModalDetails()
-    })
+      removeFromLS(bookTitle, bookAuthor);
+      handleModalDetails();
+    });
 
-    listItem.append(removeButton)
-    modalContent.append(listItem)
+    listItem.append(removeButton);
+    modalContent.append(listItem);
   }
 
-  console.log(history)
+  console.log(history);
   // var modalBody = $("#bookDetailsModalBody"); // Find modal body element
 
-  $('#bookDetailsModal').modal('show')
-  console.log('modal')
+  $("#bookDetailsModal").modal("show");
+  console.log("modal");
 }
 
 // Event listener for the modal show event
-$('#readModal').on('click', handleModalDetails)
+$("#readModal").on("click", handleModalDetails);
 
 function nyArticlesFromQuery(results) {
-
   // clear the content of the modal so that every time it is clicked, it doesnt append the array again
-  var modalContent = $('#newsModalBody')
-  modalContent.empty()
+  var modalContent = $("#newsModalBody");
+  modalContent.empty();
 
   // console.log(results)
-  for (let i=0; i < results.response.docs.length; i++){
-    var articleLink = results.response.docs[i].web_url
-    var articleItem = $(`<div class="reading-list-item">
-    <h5 id="title">${articleLink}</h5>
-    <h6 id="author">article</h6>
-    </div>
-  `)
+  for (let i = 0; i < results.response.docs.length; i++) {
+    console.log(results.response.docs[i]);
+    console.log(results.response.docs[i].multimedia.length);
 
-  modalContent.append(articleItem)
+    var artcileAbstract = results.response.docs[i].abstract;
+    var articleLink = results.response.docs[i].web_url;
+
+    // var articleItem = $('<div class="article-list-item">').append(
+    //   $("<h5>").attr("id", "articelTitle").text(artcileAbstract),
+    //   $("<a>")
+    //     .attr("href", articleLink)
+    //     .attr("target", "_blank")
+    //     .text("Read More")
+    // );
+
+    // if (results.response.docs[i].multimedia.length > 0) {
+    //   var link = results.response.docs[i].multimedia[17].legacy.thumbnail
+    //   var imageLink = `https://www.nytimes.com/${link}` // Change the index as needed
+    //   // Prepend another image tag
+    //   articleItem.prepend(
+    //     $("<img>")
+    //       .attr("src", imageLink)
+    //       .addClass("img-fluid")
+    //       .attr("alt", "Article Image")
+    //   );
+    // }
+
+
+
+    // card version 
+    var articleItem = $('<div class="row">').append(
+      $('<div class="mx-auto card mb-3 p-1" style="max-width: 50rem;">').append(
+          $('<div class="row">').append(
+              // Check if multimedia is available
+              results.response.docs[i].multimedia.length > 0 ? (
+                  $('<div class="col-md-4">').append(
+                      // Create image tag if multimedia is available
+                      $('<img>').attr('src', `https://www.nytimes.com/${results.response.docs[i].multimedia[17].legacy.thumbnail}`).addClass('img-fluid rounded-start').attr('alt', 'Article Image')
+                  )
+              ) : null,
+              $('<div class="col-md-8">').append(
+                  $('<div class="card-body">').append(
+                      $('<h5 class="card-title">').text(artcileAbstract),
+                      $('<a>').attr('href', articleLink).attr('target', '_blank').text('Read More')
+                  )
+              )
+          )
+      )
+  );
+
+    modalContent.append(articleItem);
   }
-
 }
 
 // end of callbacks
 
 function currentCategoryDetails(category, offset) {
-  getCurrentNamedListDetails(category, offset)
+  getCurrentNamedListDetails(category, offset);
 }
 
 function currentCategories() {
-  getNamesList()
+  getNamesList();
 }
-
 
 function searchArticles(ev) {
   // console.log(ev.currentTarget,parent);
   //getArticles(query);
-  var cardElement = $(ev.currentTarget).closest('.card')
+  var cardElement = $(ev.currentTarget).closest(".card");
 
   // Extract information from the card
-  var title = cardElement.find('.card-title').text()
-  var query = title.replace(/ /g, '+')
+  var title = cardElement.find(".card-title").text();
+  var query = title.replace(/ /g, "+");
   // console.log(query)
-  getArticles(query)
-
+  getArticles(query);
 }
 
 function searchResults(ev) {
-  ev.preventDefault()
-  console.log('search click')
+  ev.preventDefault();
+  console.log("search click");
 }
 
-$('#searchbtn').on('click', searchResults)
+$("#searchbtn").on("click", searchResults);
 
 //getReviewByTitle('0553418025',encodeURIComponent('THE MARTIAN'), encodeURIComponent('Andy Weir'));
 
-currentCategories()
-currentCategoryDetails('hardcover-nonfiction', 0)
-searchArticles('Fourth Wing')
+currentCategories();
+currentCategoryDetails("hardcover-nonfiction", 0);
+searchArticles("Fourth Wing");
 
-export { nyCurrentCategoryDetail, nyCurrentCategories, nyArticlesFromQuery }
+export { nyCurrentCategoryDetail, nyCurrentCategories, nyArticlesFromQuery };
 
 //https://api.nytimes.com/svc/books/v3/reviews.json?isbn=0553418025&title=The+Martian&author=Andy+Weir&api-key=pifi4e25GCt32q2X47LeT8M19jNWKUgK
