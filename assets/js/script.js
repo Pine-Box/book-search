@@ -1,4 +1,3 @@
-
 import {
   getNamesList,
   getCurrentNamedListDetails,
@@ -66,8 +65,12 @@ function nyCurrentCategoryDetail(results) {
   }
 
   $(".readList-btn").on("click", addToReadingList);
+
+  //////////////////////////////////////////////////////////
+
   $("#newsModalBtn").on("click", searchArticles);
 
+  //////////////////////////////////////////////////////////
 }
 
 function addToReadingList(event) {
@@ -160,10 +163,23 @@ function handleModalDetails(event) {
 $('#readModal').on('click', handleModalDetails)
 
 function nyArticlesFromQuery(results) {
-  console.log(results)
-  // for (let i=0;i < results.books.length; i++){
-  //
-  // }
+
+  // clear the content of the modal so that every time it is clicked, it doesnt append the array again
+  var modalContent = $('#newsModalBody')
+  modalContent.empty()
+
+  // console.log(results)
+  for (let i=0; i < results.response.docs.length; i++){
+    var articleLink = results.response.docs[i].web_url
+    var articleItem = $(`<div class="reading-list-item">
+    <h5 id="title">${articleLink}</h5>
+    <h6 id="author">article</h6>
+    </div>
+  `)
+
+  modalContent.append(articleItem)
+  }
+
 }
 
 // end of callbacks
@@ -178,8 +194,15 @@ function currentCategories() {
 
 
 function searchArticles(ev) {
-  console.log(ev.currentTarget);
+  // console.log(ev.currentTarget,parent);
   //getArticles(query);
+  var cardElement = $(ev.currentTarget).closest('.card')
+
+  // Extract information from the card
+  var title = cardElement.find('.card-title').text()
+  var query = title.replace(/ /g, '+')
+  // console.log(query)
+  getArticles(query)
 
 }
 
