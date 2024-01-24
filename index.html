@@ -16,20 +16,21 @@
   <body>
     <div id="hero-banner" class="jumbotron jumbotron-fluid p-5">
       <button
-      type="button"
-      class="btn btn-success float-end me-4 mt-3"
-      id="readModal"
-      data-toggle="modal"
-      data-target="#bookDetailsModal"
-    >
-      Reading List
-    </button>
+        type="button"
+        class="btn btn-success float-end me-4 mt-3"
+        id="readModal"
+        data-toggle="modal"
+        data-target="#bookDetailsModal"
+      >
+        Reading List
+      </button>
       <div id="background-overlay">
-
-      <div class="container">
-        <h1 class="display-4 text-white">BookSearch</h1>
-        <p class="lead text-white">The world's best books at your fingertips...</p>
-        <!-- <div class="input-group input-group-sm mb-3">
+        <div class="container-fluid">
+          <h1 class="display-4 text-white">NY Times Top Titles</h1>
+          <p class="lead text-white">
+            Browse the world's best books by category
+          </p>
+          <!-- <div class="input-group input-group-sm mb-3">
           <input
             id="search-box"
             type="text"
@@ -39,45 +40,74 @@
             placeholder="Enter book title"
           />
         </div> -->
-        <div class="dropdown">
-          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-            Choose a category of books here
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Nonfiction</a></li>
-            <li><a class="dropdown-item" href="#">Fiction</a></li>
-            <li><a class="dropdown-item" href="#">Business</a></li>
-            <li><a class="dropdown-item" href="#">Celebrities</a></li>
-            <li><a class="dropdown-item" href="#">Manga</a></li>
-            <li><a class="dropdown-item" href="#">Advice</a></li>
-            <li><a class="dropdown-item" href="#">Graphic Books</a></li>
-            <li><a class="dropdown-item" href="#">Culture</a></li>
-            <li><a class="dropdown-item" href="#">Education</a></li>
-            <li><a class="dropdown-item" href="#">Espionage</a></li>
-          </ul>
-        </div>
-        <!-- <button type="button" class="btn btn-primary" id="searchbtn">
+          <div class="dropdown" id="categoryOptions">
+            <button
+              type="button"
+              class="btn btn-secondary dropdown-toggle text-wrap"
+              data-bs-toggle="dropdown"
+              data-bs-display="static"
+              aria-expanded="false"
+            >
+              Choose a category of books here
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="#" id="hardcover-nonfiction"
+                  >Nonfiction</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" id="hardcover-fiction"
+                  >Fiction</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" id="business-books"
+                  >Business</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" id="celebrities"
+                  >Celebrities</a
+                >
+              </li>
+              <li><a class="dropdown-item" href="#" id="manga">Manga</a></li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  id="advice-how-to-and-miscellaneous"
+                  >Advice</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" id="hardcover-graphic-books"
+                  >Graphic Books</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" id="culture">Culture</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" id="education">Education</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" id="espionage">Espionage</a>
+              </li>
+            </ul>
+          </div>
+          <!-- <button type="button" class="btn btn-primary" id="searchbtn">
           Search
         </button> -->
+        </div>
       </div>
-    </div>
     </div>
 
     <!-- Search Results will appear here -->
+    <div>
+      <h3>Category: <span id="categoryName">Non-Fiction</span></h3>
+    </div>
     <div id="book-results" class="container py-5"></div>
-
-    <!-- Scripts -->
-    <!-- Bootstrap -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Ours -->
-    <script src="assets/js/script.js" type="module"></script>
-    <script src="assets/js/api.js" type="module"></script>
 
     <div
       class="modal fade"
@@ -87,12 +117,15 @@
       aria-labelledby="bookDetailsModalLabel"
       aria-hidden="true"
     >
-
-
       <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="background-color: #f0f8ff;">
-          <div class="modal-header text-center" style="background-color: #d3e0dc;">
-            <h4 class="modal-title w-100" id="bookDetailsModalLabel">Reading List</h4>
+        <div class="modal-content" style="background-color: #f0f8ff">
+          <div
+            class="modal-header text-center"
+            style="background-color: #d3e0dc"
+          >
+            <h4 class="modal-title w-100" id="bookDetailsModalLabel">
+              Reading List
+            </h4>
 
             <button
               type="button"
@@ -101,10 +134,14 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body text-center" id="bookDetailsModalBody" style="max-height: 400px; overflow-y: auto;">
+          <div
+            class="modal-body text-center"
+            id="bookDetailsModalBody"
+            style="max-height: 400px; overflow-y: auto"
+          >
             <!-- Book details will go here -->
           </div>
-          <div class="modal-footer" style="background-color: #d3e0dc;">
+          <div class="modal-footer" style="background-color: #d3e0dc">
             <button
               type="button"
               class="btn btn-secondary"
@@ -117,41 +154,58 @@
       </div>
     </div>
 
-<!-- News Articles Modal -->
-<div
-class="modal fade"
-id="newsModal"
-tabindex="-1"
-role="dialog"
-aria-labelledby="newsModalLabel"
-aria-hidden="true"
->
-<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="newsModalLabel">Articles Related to this Book</h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
-    </div>
-    <div class="modal-body" id="newsModalBody">
-      <!-- Book details will go here -->
-    </div>
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-secondary"
-        data-bs-dismiss="modal"
+    <!-- News Articles Modal -->
+    <div
+      class="modal fade"
+      id="newsModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="newsModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
       >
-        Close
-      </button>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newsModalLabel">
+              Articles Related to this Book
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="newsModalBody">
+            <!-- Book details will go here -->
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-</div>
 
-</body>
+    <!-- Scripts -->
+    <!-- Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Ours -->
+    <script src="./assets/js/script.js" type="module"></script>
+    <script src="./assets/js/api.js" type="module"></script>
+  </body>
 </html>
