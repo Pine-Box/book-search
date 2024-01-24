@@ -1,3 +1,4 @@
+
 import {
   getNamesList,
   getCurrentNamedListDetails,
@@ -50,7 +51,7 @@ function nyCurrentCategoryDetail(results) {
               <button
               type="button"
               class="btn btn-success m-2"
-              id="newsModalBtn"
+              id="newsModalBtn" 
               data-bs-toggle="modal"
               data-bs-target="#newsModal"
             >This Book in the News</button>
@@ -66,8 +67,6 @@ function nyCurrentCategoryDetail(results) {
 
   $(".readList-btn").on("click", addToReadingList);
   $("#newsModalBtn").on("click", searchArticles);
-
- 
 
 }
 
@@ -112,7 +111,7 @@ function handleModalDetails(event) {
   var history = loadHistory()
 
   // clear the content of the modal so that every time it is clicked, it doesnt append the array again
-  var modalContent = $('.modal-body')
+  var modalContent = $('#bookDetailsModalBody')
   modalContent.empty()
   // var button = $(event.relatedTarget); // Button that triggered the modal
   for (let i = 0; i < history.length; i++) {
