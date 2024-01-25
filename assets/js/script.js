@@ -163,15 +163,20 @@ function nyArticlesFromQuery(results) {
   // clear the content of the modal so that every time it is clicked, it doesnt append the array again
   var modalContent = $("#newsModalBody");
   modalContent.empty();
-
-
   for (let i = 0; i < results.response.docs.length; i++) {
-
-    var artcileAbstract = results.response.docs[i].abstract;
+    var articleAbstract = results.response.docs[i].abstract;
+    articleAbstract = articleAbstract.length > 100 ? articleAbstract.substring(0, 100) + "..." : articleAbstract
     var articleLink = results.response.docs[i].web_url;
 
+    var thumbnailUrl;
+    for (let j = 0; j < results.response.docs[i].multimedia.length; j++) {
+      if (results.response.docs[i].multimedia[j].subtype === 'thumbnail') {
+        thumbnailUrl = results.response.docs[i].multimedia[j].url;
+        break; 
+      }
+    }
     // var articleItem = $('<div class="article-list-item">').append(
-    //   $("<h5>").attr("id", "articelTitle").text(artcileAbstract),
+    //   $("<h5>").attr("id", "articelTitle").text(articleAbstract),
     //   $("<a>")
     //     .attr("href", articleLink)
     //     .attr("target", "_blank")
@@ -189,27 +194,36 @@ function nyArticlesFromQuery(results) {
     //       .attr("alt", "Article Image")
     //   );
     // }
-
+    // [9].multimedia[17].url
     // card version
     var articleItem = $('<div class="row">').append(
       $('<div class="mx-auto card mb-3 p-1" style="max-width: 50rem;">').append(
         $('<div class="row align-items-center">').append(
           // Check if multimedia is available
-          results.response.docs[i].multimedia.length > 0
+          thumbnailUrl
             ? $('<div class="col-md-4 mx-auto text-center">').append(
                 // Create image tag if multimedia is available
                 $("<img>")
                   .attr(
                     "src",
-                    `https://www.nytimes.com/${results.response.docs[i].multimedia[17].legacy.thumbnail}`
+                    `https://www.nytimes.com/${thumbnailUrl}`
                   )
                   .addClass("img-fluid rounded-start")
                   .attr("alt", "Article Image")
               )
-            : null,
+            : $('<div class="col-md-4 mx-auto text-center">').append(
+              // Create different image tag if multimedia is not available
+              $("<img>")
+                .attr(
+                  "src",
+                  "./assets/images/new-york-times-logo.png"
+                )
+                .addClass("img-fluid rounded-start")
+                .attr("alt", "Article Image")
+            ),
           $('<div class="col-md-8 mx-auto">').append(
             $('<div class="card-body">').append(
-              $('<h5 class="card-title">').text(artcileAbstract),
+              $('<h5 class="card-title">').text(articleAbstract),
               $("<a>")
                 .attr("href", articleLink)
                 .attr("target", "_blank")

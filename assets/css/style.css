@@ -58,6 +58,10 @@ h1 {
   overflow-y: auto;
 }
 
+#newsModalBody {
+  max-height: 400px;
+  overflow-y: auto;
+}
 .reading-list-item {
   padding: 10px; 
   border: 2px solid transparent; 
