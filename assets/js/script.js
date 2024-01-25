@@ -133,9 +133,11 @@ function handleModalDetails(event) {
       function removeFromLS(bookTitle, bookAuthor) {
         var history = loadHistory();
 
+
         var newHistory = history.filter(
-          (book) => book.author !== bookAuthor && book.title !== bookTitle
+          (book) => book.author !== bookAuthor || book.title !== bookTitle
         );
+
 
         localStorage.setItem("history", JSON.stringify(newHistory));
       }
