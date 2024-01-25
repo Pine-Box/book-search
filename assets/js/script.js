@@ -45,7 +45,7 @@ function nyCurrentCategoryDetail(results) {
               data-description="${nyCurrentResults.description}">Save to Read Later</a>
               <button
               type="button"
-              class="btn btn-success m-2"
+              class="btn btn-success m-2 newsModalBtn"
               id="newsModalBtn" 
               data-bs-toggle="modal"
               data-bs-target="#newsModal"
@@ -64,7 +64,7 @@ function nyCurrentCategoryDetail(results) {
 
   //////////////////////////////////////////////////////////
 
-  $("#newsModalBtn").on("click", searchArticles);
+  $(".newsModalBtn").on("click", searchArticles);
 
   //////////////////////////////////////////////////////////
 }
@@ -191,10 +191,10 @@ function nyArticlesFromQuery(results) {
     // card version
     var articleItem = $('<div class="row">').append(
       $('<div class="mx-auto card mb-3 p-1" style="max-width: 50rem;">').append(
-        $('<div class="row">').append(
+        $('<div class="row align-items-center">').append(
           // Check if multimedia is available
           results.response.docs[i].multimedia.length > 0
-            ? $('<div class="col-md-4">').append(
+            ? $('<div class="col-md-4 mx-auto text-center">').append(
                 // Create image tag if multimedia is available
                 $("<img>")
                   .attr(
@@ -205,7 +205,7 @@ function nyArticlesFromQuery(results) {
                   .attr("alt", "Article Image")
               )
             : null,
-          $('<div class="col-md-8">').append(
+          $('<div class="col-md-8 mx-auto">').append(
             $('<div class="card-body">').append(
               $('<h5 class="card-title">').text(artcileAbstract),
               $("<a>")
@@ -233,13 +233,20 @@ function currentCategories() {
 }
 
 function searchArticles(ev) {
+
   //getArticles(query);
+
   var cardElement = $(ev.currentTarget).closest(".card");
 
   // Extract information from the card
   var title = cardElement.find(".card-title").text();
+  var author = cardElement.find("h6").text();
+  author = author.replace(/ /g, "+")
   var query = title.replace(/ /g, "+");
-  getArticles(query);
+
+  // console.log(query)
+  getArticles(query, author);
+
 }
 
 $("#categoryOptions").on("hide.bs.dropdown", ({ clickEvent }) => {

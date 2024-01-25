@@ -61,8 +61,8 @@ const articlesurl ="https://api.nytimes.com/svc/search/v2/articlesearch.json?q="
     }
 
 
-    function getArticles(query){
-        let url = articlesurl +query+"&api-key=" + ny_api_key;
+    function getArticles(query, author){
+        let url = articlesurl +query+"&fq=persons:"+ author +"&api-key=" + ny_api_key;
         console.log(url);
         fetch(url)
             .then(function (response) {
