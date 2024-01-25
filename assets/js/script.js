@@ -8,9 +8,6 @@ import {
 //api call backs
 function nyCurrentCategories(results) {
 
-  // for (let i=0;i < results.length; i++){
-  //
-  // }
 }
 
 const readingList = "history";
@@ -175,26 +172,7 @@ function nyArticlesFromQuery(results) {
         break; 
       }
     }
-    // var articleItem = $('<div class="article-list-item">').append(
-    //   $("<h5>").attr("id", "articelTitle").text(articleAbstract),
-    //   $("<a>")
-    //     .attr("href", articleLink)
-    //     .attr("target", "_blank")
-    //     .text("Read More")
-    // );
 
-    // if (results.response.docs[i].multimedia.length > 0) {
-    //   var link = results.response.docs[i].multimedia[17].legacy.thumbnail
-    //   var imageLink = `https://www.nytimes.com/${link}` // Change the index as needed
-    //   // Prepend another image tag
-    //   articleItem.prepend(
-    //     $("<img>")
-    //       .attr("src", imageLink)
-    //       .addClass("img-fluid")
-    //       .attr("alt", "Article Image")
-    //   );
-    // }
-    // [9].multimedia[17].url
     // card version
     var articleItem = $('<div class="row">').append(
       $('<div class="mx-auto card mb-3 p-1" style="max-width: 50rem;">').append(
@@ -273,21 +251,11 @@ $("#categoryOptions").on("hide.bs.dropdown", ({ clickEvent }) => {
     
   }
 
-  // currentCategoryDetails(categoryName, 0);
 });
 
-// function searchResults(ev) {
-//   ev.preventDefault();
-
-// }
-
-// $("#searchbtn").on("click", searchResults);
-
-//getReviewByTitle('0553418025',encodeURIComponent('THE MARTIAN'), encodeURIComponent('Andy Weir'));
 
 currentCategories();
 currentCategoryDetails("hardcover-nonfiction", 0);
 
 export { nyCurrentCategoryDetail, nyCurrentCategories, nyArticlesFromQuery };
 
-//https://api.nytimes.com/svc/books/v3/reviews.json?isbn=0553418025&title=The+Martian&author=Andy+Weir&api-key=pifi4e25GCt32q2X47LeT8M19jNWKUgK
