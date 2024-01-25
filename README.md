@@ -29,4 +29,4 @@ https://Pine-Box.github.io/book-search/
 
 ## Screenshot:
 
-![screenshot of website](https://landingpage.png)
+![screenshot of website](assets\images\landingpage.png)
