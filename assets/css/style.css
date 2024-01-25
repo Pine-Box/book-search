@@ -47,6 +47,23 @@
 }
 
 
+.modal-header {
+  background-color: #d3e0dc;
+}
+
+.modal-content {
+  background-color: #f0f8ff;
+}
+
+.modal-footer {
+  background-color: #d3e0dc;
+}
+
+#bookDetailsModalBody {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
 .reading-list-item {
   padding: 10px; 
   border: 2px solid transparent; 
