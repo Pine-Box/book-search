@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>BookSearch</title>
   </head>
-
+<!-- Hero Banner -->
   <body>
     <div id="hero-banner" class="jumbotron jumbotron-fluid p-5">
+  <!-- Reading List Button -->
       <button
         type="button"
         class="btn btn-success float-end me-4 mt-3"
@@ -26,20 +27,12 @@
       </button>
       <div id="background-overlay">
         <div class="container-fluid">
-          <h1 class="display-4 text-white">NY Times Top Titles</h1>
+          <!-- Title & Tagline -->
+          <h1 class="display-2 text-white">NY Times Top Titles</h1>
           <p class="lead text-white">
             Browse the world's best books by category
           </p>
-          <!-- <div class="input-group input-group-sm mb-3">
-          <input
-            id="search-box"
-            type="text"
-            class="form-control"
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-sm"
-            placeholder="Enter book title"
-          />
-        </div> -->
+          <!-- Dropdown Menu -->
           <div class="dropdown" id="categoryOptions">
             <button
               type="button"
@@ -96,19 +89,17 @@
               </li>
             </ul>
           </div>
-          <!-- <button type="button" class="btn btn-primary" id="searchbtn">
-          Search
-        </button> -->
+
         </div>
       </div>
     </div>
 
-    <!-- Search Results will appear here -->
-    <div>
-      <h3>Category: <span id="categoryName">Non-Fiction</span></h3>
+    <!-- Category Books will appear here -->
+    <div id="current-category-header" class="container-fluid mt-2 ps-5">
+      <h3 class="ms-4 py-1 text-white display-6">Current Category: <span id="categoryName">Non-Fiction</span></h3>
     </div>
     <div id="book-results" class="container py-5"></div>
-
+    <!-- Reading List Modal -->
     <div
       class="modal fade"
       id="bookDetailsModal"
@@ -178,7 +169,7 @@
             ></button>
           </div>
           <div class="modal-body" id="newsModalBody">
-            <!-- Book details will go here -->
+            
           </div>
           <div class="modal-footer">
             <button
