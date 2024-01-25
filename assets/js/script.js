@@ -7,8 +7,7 @@ import {
 
 //api call backs
 function nyCurrentCategories(results) {
-  console.log("categories");
-  console.log(results);
+
   // for (let i=0;i < results.length; i++){
   //
   // }
@@ -20,15 +19,9 @@ function loadHistory() {
   if (history == null) history = [];
   return history;
 }
-//store city search to local storage
-// export function storeHistory(title) {
-//   let history = loadHistory();
-//   history.push({ title: title });
-//   localStorage.setItem(readingList, JSON.stringify(history));
-// }
 
 function nyCurrentCategoryDetail(results) {
-  console.log(results);
+  
   $("#book-results").empty();
   for (let i = 0; i < results.results.books.length; i++) {
     var nyCurrentResults = results.results.books[i];
@@ -95,7 +88,7 @@ function addToReadingList(event) {
   // Get the existing reading list from local storage
   var readingList = loadHistory();
   var readingKey = "history";
-  console.log(readingList);
+  
 
   // Add the new book to the reading list only if it does not exist in the array
   // found is True if it finds an object with the same title and author
@@ -109,7 +102,6 @@ function addToReadingList(event) {
     localStorage.setItem(readingKey, JSON.stringify(readingList));
   }
 
-  console.log(readingList);
 }
 
 // Function to handle modal details when it is shown
@@ -155,11 +147,11 @@ function handleModalDetails(event) {
     modalContent.append(listItem);
   }
 
-  console.log(history);
+ 
   // var modalBody = $("#bookDetailsModalBody"); // Find modal body element
 
   $("#bookDetailsModal").modal("show");
-  console.log("modal");
+  
 }
 
 // Event listener for the modal show event
@@ -170,10 +162,8 @@ function nyArticlesFromQuery(results) {
   var modalContent = $("#newsModalBody");
   modalContent.empty();
 
-  // console.log(results)
+
   for (let i = 0; i < results.response.docs.length; i++) {
-    console.log(results.response.docs[i]);
-    console.log(results.response.docs[i].multimedia.length);
 
     var artcileAbstract = results.response.docs[i].abstract;
     var articleLink = results.response.docs[i].web_url;
@@ -243,24 +233,18 @@ function currentCategories() {
 }
 
 function searchArticles(ev) {
-  // console.log(ev.currentTarget,parent);
   //getArticles(query);
-  // console.log(query)
   var cardElement = $(ev.currentTarget).closest(".card");
 
   // Extract information from the card
   var title = cardElement.find(".card-title").text();
   var query = title.replace(/ /g, "+");
-  // console.log(query)
   getArticles(query);
-  console.log(query);
 }
 
 $("#categoryOptions").on("hide.bs.dropdown", ({ clickEvent }) => {
   if (clickEvent?.target) {
-    // console.log(clickEvent.target.innerText);
     var categoryName = clickEvent.target.id;
-    console.log(categoryName);
     $("#categoryName").text(clickEvent.target.innerText)
     currentCategoryDetails(categoryName, 0);
     
@@ -271,7 +255,7 @@ $("#categoryOptions").on("hide.bs.dropdown", ({ clickEvent }) => {
 
 // function searchResults(ev) {
 //   ev.preventDefault();
-//   console.log("search click");
+
 // }
 
 // $("#searchbtn").on("click", searchResults);
